@@ -34,7 +34,3 @@ class AffineCipher:
         
         return ret
 
-cipher = AffineCipher(2, 3, 5)
-ciphertext = cipher.encrypt("0 1 2 3 4")
-plaintext = cipher.decrypt(ciphertext)
-
