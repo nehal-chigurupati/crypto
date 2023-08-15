@@ -57,6 +57,20 @@ class AlphabetNGraphToVector:
         
         return ret
 
+    def splitIntoNSegments(msg, N):
+        if (len(msg) % N) != 0:
+            raise Exception("Improper message length")
+        i = N
+        ret = msg[0:i]
+        while i < len(msg):
+            ret = ret + " " + msg[i:i+N]
+            i = i + N
+        
+        return ret
+
+        
+            
+
         
 
     

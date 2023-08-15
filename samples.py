@@ -10,7 +10,7 @@ class AlphabetAffineMatrixEncryption:
         self._cipher = AffineEncipheringMatrix(self._A, self._B, self._N)
 
     def encrypt(self, message):
-        plaintext = AlphabetNGraphToVector.convert(message)
+        plaintext = AlphabetNGraphToVector.convert(AlphabetNGraphToVector.splitIntoNSegments(message, self._wordLength))
         ciphertext = self._cipher.encrypt(plaintext)
 
         return ciphertext
@@ -18,14 +18,18 @@ class AlphabetAffineMatrixEncryption:
     def decrypt(self, message):
         plaintext = self._cipher.decrypt(message)
         originalMessage = AlphabetNGraphToVector.reverse(plaintext)
-
+        originalMessage = originalMessage.replace(" ", "")
         return originalMessage
 
-message = "AB CD"
+message = "HELLOSIR"
 A = [[1, 3], [1, 4]]
 B = [[1], [23]]
 cipher = AlphabetAffineMatrixEncryption(A, B, 2)
 ciphertext = cipher.encrypt(message)
 recoveredmessage = cipher.decrypt(ciphertext)
+
+print(message)
+print(ciphertext)
+print(recoveredmessage)
 
 
