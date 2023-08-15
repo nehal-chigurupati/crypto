@@ -67,10 +67,3 @@ class AlphabetNGraphToVector:
             i = i + N
         
         return ret
-
-        
-            
-
-        
-
-    

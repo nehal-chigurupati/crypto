@@ -34,6 +34,27 @@ class Congruences:
     
     def solveLinearCongruence(y, a, b, N):
         return ((Congruences.modInverse(a, N) * y) + Congruences.modInverse(b, N)) % N
+    
+    def modularExponent(a, b, N):
+        ret = a
+        for i in range(b - 1):
+            ret = (ret * a) % N
+        return ret
+
+class ModularExponentiation:
+    def constantTimePower(base, power, N):
+        result = 1
+        while power > 0:
+            # constant-time conditional copy
+            sBit = power%2==1        
+            result = ((result * base) % N)*sBit+(1-sBit)*result
+
+            # Divide the power by 2
+            power = power // 2
+            # Multiply base to itself
+            base = (base * base) % N
+
+        return result
 
 class Matrix:
     def getColumn(arr, ind):
@@ -99,10 +120,3 @@ class Matrix:
             res[i] = currEntry
         
         return res
-
-    def inverseOverField(A, N):
-        pass
-
-    def isInvertibleOverField(A):
-        pass
-    
