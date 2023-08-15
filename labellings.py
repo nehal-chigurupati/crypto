@@ -67,3 +67,27 @@ class AlphabetNGraphToVector:
             i = i + N
         
         return ret
+
+class TextToASCII:
+    def convert(text):
+        chars = list(text)
+        ret = str(ord(chars[0]))
+        
+        for i in chars[1:]:
+            ret = ret + " " + str(ord(i))
+
+        return ret
+    
+    def reverse(val):
+        nums = val.split()
+        ret = chr(int(nums[0]))
+
+        for i in nums[1:]:
+            ret = ret + chr(int(i))
+        
+        return ret
+
+
+
+        
+    

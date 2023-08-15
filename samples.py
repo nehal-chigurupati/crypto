@@ -1,6 +1,6 @@
-from labellings import AlphabetNGraphToVector, AlphabetToInteger
+from labellings import AlphabetNGraphToVector, AlphabetToInteger, TextToASCII
 from AffineEncipheringMatrix import AffineEncipheringMatrix
-from RSA import RSAEncryption
+from RSA import RSAEncryption, RSAEncrypter, RSADecrypter, RSAUtils
 
 class AlphabetAffineMatrixEncryption:
     def __init__(self, A, B, wordLength):
@@ -35,34 +35,26 @@ print(ciphertext)
 print(recoveredmessage)
 """
 
-class AlphabetRSAEncryption:
+class TextRSAEncryption:
+    #Converts text into ASCII, then encrypts via RSA. 
     def __init__(self):
         self.cipher = RSAEncryption()
     
-    def encryptLetter(self, unitMsg):
-        return self.cipher.encrypt(AlphabetToInteger.convertLetter(unitMsg))
-
-    def decryptLetter(self, unitMsg):
-        return AlphabetToInteger.reverseLetter(self.cipher.decrypt(unitMsg))
-
     def encrypt(self, msg):
-        #no spaces assumed here
-        letters = list(msg)
-        ret = self.encryptLetter(letters[0])
-
-        for i in letters[1:]:
-            ret = ret + " " + self.encryptLetter(i)
-        
-        return ret
+       convertedText = TextToASCII.convert(msg)
+       return self.cipher.encrypt(convertedText)
 
     def decrypt(self, msg):
-        split = msg.split()
-        ret = self.decryptLetter(split[0])
+        print(msg)
+        return TextToASCII.reverse(self.cipher.decrypt(msg))
 
-        for i in split[1:]:
-            ret = ret + " " + self.decryptLetter(i)
-        
-        return ret
+    def decryptFile(self, filename):
+        return TextToASCII.reverse(self.cipher.decryptFile(filename))
+    
+message = "Uh oh, another line of text!"
+publicKeys = RSAUtils.readKeyFile("public.txt")
+encrypter = RSAEncrypter(publicKeys[0], publicKeys[1])
+print(encrypter.encrypt(TextToASCII.convert(message)))
 
 
     
