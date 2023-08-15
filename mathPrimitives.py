@@ -49,7 +49,7 @@ class Matrix:
         
         sum = 0
         for i in range(len(A)):
-            sum += ((A[i] * B[i]))
+            sum += int(((A[i] * B[i])))
         
         return sum % N
     
@@ -83,3 +83,26 @@ class Matrix:
             res[i] = currEntry
         
         return res
+
+    def subtractionOverField(A, B, N):
+        if len(A) != len(B):
+            raise Exception("Incompatible dimension!")
+        if len(A[0]) != len(B[0]):
+            raise Exception("Incompatible dimension!")
+    
+        res = [None] * len(A)
+        for i in range(len(A)):
+            currEntry = [None] * len(A[0])
+            for j in range(len(A[0])):
+                currEntry[j] = (A[i][j] - B[i][j]) % N
+        
+            res[i] = currEntry
+        
+        return res
+
+    def inverseOverField(A, N):
+        pass
+
+    def isInvertibleOverField(A):
+        pass
+    
