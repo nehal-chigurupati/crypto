@@ -70,9 +70,9 @@ class Matrix:
 
     def additionOverField(A, B, N):
         if len(A) != len(B):
-            raise Exception("Incompatible dimension!")
+            raise Exception("Incompatible row dimension!")
         if len(A[0]) != len(B[0]):
-            raise Exception("Incompatible dimension!")
+            raise Exception("Incompatible column dimension!")
     
         res = [None] * len(A)
         for i in range(len(A)):

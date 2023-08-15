@@ -14,10 +14,11 @@ class AffineEncipheringMatrix:
     
     def encryptUnit(self, unitMsg):
         #in this case, a unit message is an n-vector represented vertically, where n is the number of rows in A
-        return Matrix.additionOverField(Matrix.multiplicationOverField(self._A, unitMsg, self._N), self._B, self._N)
+        mult = Matrix.multiplicationOverField(self._A, unitMsg, self._N)
+        return Matrix.additionOverField(mult, self._B, self._N)
     
     def decryptUnit(self, unitMsg):
-        AInv = MatrixTools.inverse(A)
+        AInv = MatrixTools.inverse(self._A)
         ret = Matrix.multiplicationOverField(AInv, unitMsg, self._N)
         ret2 = Matrix.multiplicationOverField(AInv, self._B, self._N)
         return Matrix.subtractionOverField(ret, ret2, self._N)
