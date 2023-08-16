@@ -2,7 +2,7 @@ from mathPrimitives import Matrix
 from MatrixTools import MatrixTools
 
 #Represent a message as a tuple of unit messages
-
+#Note: N should be the size of the alphabet to the power of the number of componenents in a unit message vector
 class AffineEncipheringMatrix:
     def __init__(self, A, B, N):
         self._A = A
